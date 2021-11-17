@@ -3,8 +3,6 @@ from os.path import exists
 import filelist.filelist as filelist
 import time
 
-temporal_torrent = "torrent"
-
 # check if the csv files exists otherwise create it
 def is_wishlist():
     if not exists("wishlist.csv"):
@@ -91,12 +89,32 @@ def show():
 
 async def run(message, temp):
     torrent = filelist.run() 
+    i = 0
 
+    #  open the csv file
+    with open("wishlist.csv") as file:
+        torrent_reader = csv.reader(file)
+        # get the length of our wishlist
+        list_len = len(list(torrent_reader))
+    
+    # store the wishlist
+    wishlist = show().split("\n")
+
+    # check if the torrent is in our wishlist
+    # if so tag everyone and return
+    while i < list_len:
+        if wishlist[i] in torrent.lower():
+            await message.channel.send("Found: " + torrent + "@everyone")
+            return
+        i += 1
+
+    # if the torrent is not in the wishlist simply display the torrent name, no tag
     if torrent != temp: 
         await message.channel.send("Found: " + torrent)
     
+    # store the previous torrent so we do not display the same  torrent a second time
     temp = torrent
 
     time.sleep(10)
 
-    await run(message, temp)
+    # await run(message, temp)

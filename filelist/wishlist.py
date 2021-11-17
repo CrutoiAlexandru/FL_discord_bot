@@ -93,7 +93,7 @@ async def run(message):
 
     # retain the last torrent we found
     with open("last_torrent.txt") as file:
-        temp = file.readline()
+        temp = file.read()
 
     #  open the csv file
     with open("wishlist.csv") as file:
@@ -116,7 +116,9 @@ async def run(message):
     if torrent != temp: 
         await message.channel.send("Found: " + torrent)
     
-    print(temp, torrent)
+    # check to see if vars are the same
+    print(temp, "\n")
+
     # store the previous torrent so we do not display the same  torrent a second time
     temp = torrent
 

@@ -104,16 +104,21 @@ async def run(message):
     # store the wishlist
     wishlist = show().split("\n")
 
-    # check if the torrent is in our wishlist
-    # if so tag everyone and return
-    while i < list_len:
-        if wishlist[i] in torrent.lower():
-            await message.channel.send("Found: " + torrent + "@everyone")
-            return
-        i += 1
-
     # if the torrent is not in the wishlist simply display the torrent name, no tag
     if torrent != temp: 
+        # check if the torrent is in our wishlist
+        # if so tag everyone and return
+        while i < list_len:
+            if wishlist[i] in torrent.lower():
+                await message.channel.send("Found: " + torrent + "@everyone")
+                # store the previous torrent so we do not display the same  torrent a second time
+                temp = torrent
+
+                with open("last_torrent.txt", "w") as file:
+                    file.write(temp)
+                return
+            i += 1
+
         await message.channel.send("Found: " + torrent)
     
     # check to see if vars are the same

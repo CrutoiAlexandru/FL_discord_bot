@@ -91,9 +91,6 @@ async def run(message):
     torrent = filelist.run() 
     i = 0
 
-    # check if torrent retaining file exists
-    is_last_torrent()
-
     # retain the last torrent we found
     with open("last_torrent.txt") as file:
         temp = file.readline()

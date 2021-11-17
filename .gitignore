@@ -128,8 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# All csv files
+# All temporary files
 *.csv 
+*.txt
 
 # Personal data config file
 config.py

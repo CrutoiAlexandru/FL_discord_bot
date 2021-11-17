@@ -1,11 +1,13 @@
 import discord 
 from discord.ext import commands
 import filelist.wishlist as wishlist
+import threading
+import asyncio
 
 # list of commands for our bot
 help = '''
     These are my commands: 
-    fl.run  - start my data feed
+    ping    - let's play
     fl.wl   - add a torrent to wishlist
     fl.rm   - remove a torrent from the wishlist
     fl.show - show the wishlist items
@@ -55,10 +57,14 @@ def on_message(client):
             # send a message to show wishlist
             await message.channel.send("This is your wishlist:\n" + wishlist.show())
 
-        # run command
-        # run our data feed
-        if message.content.startswith("fl.run"): 
-            # send a message to show we started the feed
-            await message.channel.send("Starting feed")
+        # run our data feed non-stop 
+        # but only after the first chat message
+        async def background_torrents_run(message):
             # call the run function
-            await wishlist.run(message, "torrent")
+            await client.wait_until_ready()
+            
+            while not client.is_closed():
+                await asyncio.sleep(2)
+                await wishlist.run(message)
+
+        client.loop.create_task(background_torrents_run(message))

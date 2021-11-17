@@ -87,9 +87,16 @@ def show():
     torrent_string = str(torrent_wishlist).replace(",", "").replace(" ", "").replace("[", "").replace("]", "\n").replace("'", "")
     return torrent_string
 
-async def run(message, temp):
+async def run(message):
     torrent = filelist.run() 
     i = 0
+
+    # check if torrent retaining file exists
+    is_last_torrent()
+
+    # retain the last torrent we found
+    with open("last_torrent.txt") as file:
+        temp = file.readline()
 
     #  open the csv file
     with open("wishlist.csv") as file:
@@ -112,9 +119,9 @@ async def run(message, temp):
     if torrent != temp: 
         await message.channel.send("Found: " + torrent)
     
+    print(temp, torrent)
     # store the previous torrent so we do not display the same  torrent a second time
     temp = torrent
 
-    time.sleep(10)
-
-    # await run(message, temp)
+    with open("last_torrent.txt", "w") as file:
+        file.write(temp)

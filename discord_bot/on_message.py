@@ -59,5 +59,6 @@ def on_message(client):
         # run our data feed
         if message.content.startswith("fl.run"): 
             # send a message to show we started the feed
-            wishlist.run()
-            await message.channel.send("Started feed")
+            await message.channel.send("Starting feed")
+            # call the run function
+            await wishlist.run(message, "torrent")

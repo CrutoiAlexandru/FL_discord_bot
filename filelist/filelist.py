@@ -4,9 +4,9 @@ import feedparser
 import config
 
 def get_rss_feed():
-    feed = feedparser.parse("https://filelist.io/rss.php?username="+config.USERNAME+"&passkey="+config.PASSKEY)
+    feed = feedparser.parse("https://filelist.io/rss.php?username=" + config.USERNAME + "&passkey=" + config.PASSKEY)
 
-    print(feed.entries[0].title)
+    return feed.entries[0].title
 
 def run():
-    get_rss_feed()
+    return get_rss_feed()

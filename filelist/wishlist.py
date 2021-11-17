@@ -1,6 +1,9 @@
 import csv
 from os.path import exists
 import filelist.filelist as filelist
+import time
+
+temporal_torrent = "torrent"
 
 # check if the csv files exists otherwise create it
 def is_wishlist():
@@ -86,5 +89,14 @@ def show():
     torrent_string = str(torrent_wishlist).replace(",", "").replace(" ", "").replace("[", "").replace("]", "\n").replace("'", "")
     return torrent_string
 
-def run():
-    filelist.run()
+async def run(message, temp):
+    torrent = filelist.run() 
+
+    if torrent != temp: 
+        await message.channel.send("Found: " + torrent)
+    
+    temp = torrent
+
+    time.sleep(10)
+
+    await run(message, temp)

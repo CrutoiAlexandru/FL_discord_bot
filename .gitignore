@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # All csv files
-.csv 
+*.csv 
 
 # Personal data config file
 config.py

@@ -54,3 +54,10 @@ def on_message(client):
         if message.content.startswith("fl.show"): 
             # send a message to show wishlist
             await message.channel.send("This is your wishlist:\n" + wishlist.show())
+
+        # run command
+        # run our data feed
+        if message.content.startswith("fl.run"): 
+            # send a message to show we started the feed
+            wishlist.run()
+            await message.channel.send("Started feed")

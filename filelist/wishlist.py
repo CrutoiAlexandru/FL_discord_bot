@@ -1,5 +1,6 @@
 import csv
 from os.path import exists
+import filelist.filelist as filelist
 
 # check if the csv files exists otherwise create it
 def is_wishlist():
@@ -84,3 +85,6 @@ def show():
     # return our csv list cleanly
     torrent_string = str(torrent_wishlist).replace(",", "").replace(" ", "").replace("[", "").replace("]", "\n").replace("'", "")
     return torrent_string
+
+def run():
+    filelist.run()

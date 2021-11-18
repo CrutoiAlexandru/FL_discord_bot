@@ -64,7 +64,7 @@ def on_message(client):
             await client.wait_until_ready()
             
             while not client.is_closed():
-                await asyncio.sleep(2)
+                await asyncio.sleep(25)
                 await wishlist.run(message)
 
         client.loop.create_task(background_torrents_run(message))

@@ -10,8 +10,11 @@ He can store a wishlist of the torrents you are looking forward to being uploade
 
 ## Commands:
 fl.help - provides a list of the following commands
+
     fl.wl - create a wishlist for your favorite torrents as explained above, he does not retain the exact same name twice
+    
     fl.rm - remove a torrent from the wishlist
+    
     ping  - look if he is alive, if he is he will reply with pong
 
 ## How it works

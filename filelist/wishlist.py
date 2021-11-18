@@ -87,9 +87,19 @@ def show():
     torrent_string = str(torrent_wishlist).replace(",", "").replace(" ", "").replace("[", "").replace("]", "\n").replace("'", "")
     return torrent_string
 
+def is_last_torrent_file():
+    # allways start by creating a file that retains our last torrent value
+    # this way it allows us to see the repeated torrent when we start the program but not whilst it is runing 
+    if not exists("last_torrent.txt"):
+        with open("last_torrent.txt", "w") as file:
+            file.write("empty")
+
 async def run(message):
     torrent = filelist.run() 
     i = 0
+
+    # check if the last torrent retainer exists
+    is_last_torrent_file()
 
     # retain the last torrent we found
     with open("last_torrent.txt") as file:
